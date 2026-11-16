@@ -50,10 +50,10 @@ $progress = $goal > 0 ? min(100, (int) round($raised / $goal * 100)) : 0;
                     <input type="hidden" name="campaign_id" value="<?= (int) $campaign['id'] ?>">
                     <label for="donor_name">Your name</label>
                     <input id="donor_name" name="donor_name" type="text" maxlength="120" autocomplete="name"
-                        value="<?= e($oldInput['donor_name'] ?? '') ?>" required>
+                        value="<?= e($oldInput['donor_name'] ?? ($currentUser['name'] ?? '')) ?>" required>
                     <label for="donor_email">Email address</label>
                     <input id="donor_email" name="donor_email" type="email" maxlength="254" autocomplete="email"
-                        value="<?= e($oldInput['donor_email'] ?? '') ?>" required>
+                        value="<?= e($oldInput['donor_email'] ?? ($currentUser['email'] ?? '')) ?>" required>
                     <label for="amount">Contribution amount</label>
                     <div class="amount-input"><span aria-hidden="true">$</span>
                         <input id="amount" name="amount" type="number" min="0.01" max="1000000" step="0.01"

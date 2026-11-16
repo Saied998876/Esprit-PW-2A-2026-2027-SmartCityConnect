@@ -19,6 +19,17 @@ CREATE TABLE donations (
     FOREIGN KEY (campaign_id) REFERENCES campaigns(id) ON DELETE CASCADE
 );
 
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL COLLATE NOCASE UNIQUE,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'citizen'
+        CHECK (role IN ('citizen', 'admin')),
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO campaigns (title, description, category, goal_cents) VALUES
 ('A greener street, block by block',
  'Plant shade trees and native gardens along busy walking routes, bringing cooler streets and more welcoming public spaces to the neighbourhood.',

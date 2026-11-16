@@ -19,6 +19,7 @@ The main features of Smart City Connect are:
 - **Green Rewards:** Encourage citizens to participate in environmental activities through a reward system.
 - **Complaints Management:** Submit complaints and receive responses.
 - **Donations:** Support environmental campaigns through donations.
+- **Account security:** Citizen registration, profile management, and role-based administrator access.
 
 ## Tech Stack
 
@@ -129,20 +130,39 @@ Open your web browser and enter:
 
 `http://localhost/Esprit-PW-2A-2026-2027-SmartCityConnect/`
 
-**Step 6: Start using the application**
+**Step 6: Set up the first administrator**
 
-Once the project files and database configuration are ready, you can access the application through your browser.
+Enable PHP's `pdo_sqlite` extension. In PowerShell, set your own administrator email and a unique password of at least 12 characters, then run the setup script:
 
-### Donations module
+```powershell
+$env:ADMIN_EMAIL = 'admin@example.com'
+$env:ADMIN_PASSWORD = 'replace-with-a-unique-password'
+& 'C:\xampp\php\php.exe' 'C:\xampp\htdocs\Esprit-PW-2A-2026-2027-SmartCityConnect\scripts\createAdmin.php'
+Remove-Item Env:ADMIN_EMAIL, Env:ADMIN_PASSWORD
+```
 
-The Donations module has a public campaign page and a back office:
+Update the script path if the project is in another folder. The script runs only in the command line, creates the local database if needed, and refuses to create a second initial administrator. Do not use the sample values as real credentials or store actual passwords in Git.
 
-- Open `http://localhost/Esprit-PW-2A-2026-2027-SmartCityConnect/` to browse campaigns and make a pledge.
-- Open `http://localhost/Esprit-PW-2A-2026-2027-SmartCityConnect/admin.php` to manage campaigns and view pledges.
-- Make sure PHP's `pdo_sqlite` extension is enabled. On first visit, the module creates a local database in `data/donations.sqlite` and adds three example campaigns.
-- The local demo admin password is `admin123`. Set the `ADMIN_PASSWORD` environment variable before deployment.
+**Step 7: Start using the application**
 
-The module records pledges only; it does not collect payment details. The local database is not included in Git.
+- Open `http://localhost/Esprit-PW-2A-2026-2027-SmartCityConnect/` to browse campaigns.
+- Register a citizen account at `/index.php?page=register` to manage a profile and make a pledge.
+- Sign in at `/index.php?page=login`.
+- Administrator accounts can manage campaigns and pledges at `/admin.php`, and user accounts at `/users.php`.
+
+The database is created at `data/donations.sqlite` on the first request. Existing campaign data is kept when the users table is added. The database is local and is not included in Git.
+
+### User management, security, and validation
+
+Public registration creates citizen accounts. Administrators can create, view, update, and delete accounts, assign citizen or administrator roles, and reset a user's password. Citizens can update their own name, email, and password. The application prevents deleting/demoting the last administrator and prevents administrators from deleting or demoting themselves.
+
+Passwords are stored using PHP `password_hash()` and checked with `password_verify()`. SQL queries use prepared statements. Forms have browser and server-side validation and CSRF tokens. Session cookies use HttpOnly and SameSite settings; session IDs are regenerated at sign-in, and idle/old sessions expire. Serve the project over HTTPS outside local development.
+
+The Donations module records pledges only; it does not collect payment details.
+
+### Team collaboration and integration
+
+Use the repository's GitHub Project Board to assign validation work to named team members and track status, review, and integration. Each contributor should work on their own branch with attributable commits; merge reviewed work into the shared validation branch and test the complete project from one clean checkout. Only record contributions that team members actually made.
 
 ## Sustainable Development Goals
 

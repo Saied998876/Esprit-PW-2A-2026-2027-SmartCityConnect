@@ -3,14 +3,29 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/Model/campaign.php';
 require_once __DIR__ . '/Model/donation.php';
+require_once __DIR__ . '/Model/user.php';
 require_once __DIR__ . '/Controller/adminC.php';
+require_once __DIR__ . '/Controller/userC.php';
 
 $db = database();
 $campaignModel = new CampaignModel($db);
 $donationModel = new DonationModel($db);
-$adminController = new AdminController($campaignModel, $donationModel);
+$userController = new UserController(new UserModel($db));
+$currentUser = $userController->currentUser();
+$adminController = new AdminController($campaignModel);
 $currentPage = 'admin';
 $pageTitle = 'Back office · Smart City Connect';
+
+if ($currentUser === null) {
+    setMessage('error', 'Sign in with an administrator account to open the back office.');
+    header('Location: index.php?page=login&next=admin');
+    exit;
+}
+if ($currentUser['role'] !== 'admin') {
+    setMessage('error', 'Your account does not have administrator access.');
+    header('Location: index.php?page=profile');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!checkCsrfToken(isset($_POST['_csrf']) ? $_POST['_csrf'] : null)) {
@@ -20,30 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $action = isset($_POST['action']) ? $_POST['action'] : '';
-
-    if ($action === 'login') {
-        if ($adminController->login(isset($_POST['password']) ? $_POST['password'] : '')) {
-            header('Location: admin.php');
-            exit;
-        }
-
-        $loginError = 'That password did not match. Please try again.';
-        require __DIR__ . '/Views/adminLogin.php';
-        exit;
-    }
-
-    if (!$adminController->isLoggedIn()) {
-        http_response_code(403);
-        header('Location: admin.php');
-        exit;
-    }
-
-    if ($action === 'logout') {
-        $adminController->logout();
-        header('Location: admin.php');
-        exit;
-    }
+    $action = inputString($_POST, 'action');
 
     if ($action === 'save_campaign') {
         $errors = $adminController->saveCampaign($_POST);
@@ -59,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($action === 'delete_campaign') {
-        $id = isset($_POST['campaign_id']) ? $_POST['campaign_id'] : '';
+        $id = inputId($_POST, 'campaign_id');
 
         if ($adminController->deleteCampaign($id)) {
             setMessage('notice', 'Campaign deleted.');
@@ -71,14 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($action === 'logout') {
+        $userController->logout();
+        header('Location: index.php');
+        exit;
+    }
+
     http_response_code(400);
     $message = 'This action is not available.';
     require __DIR__ . '/Views/notFound.php';
-    exit;
-}
-
-if (!$adminController->isLoggedIn()) {
-    require __DIR__ . '/Views/adminLogin.php';
     exit;
 }
 

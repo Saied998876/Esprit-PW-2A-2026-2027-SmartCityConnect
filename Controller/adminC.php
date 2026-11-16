@@ -3,51 +3,21 @@
 class AdminController
 {
     private $campaignModel;
-    private $donationModel;
 
-    public function __construct($campaignModel, $donationModel)
+    public function __construct($campaignModel)
     {
         $this->campaignModel = $campaignModel;
-        $this->donationModel = $donationModel;
-    }
-
-    public function isLoggedIn()
-    {
-        return isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
-    }
-
-    public function login($password)
-    {
-        $correctPassword = getenv('ADMIN_PASSWORD');
-        if (!$correctPassword) {
-            $correctPassword = 'admin123';
-        }
-
-        if (!hash_equals($correctPassword, $password)) {
-            return false;
-        }
-
-        session_regenerate_id(true);
-        $_SESSION['is_admin'] = true;
-
-        return true;
-    }
-
-    public function logout()
-    {
-        unset($_SESSION['is_admin']);
-        session_regenerate_id(true);
     }
 
     public function saveCampaign($form)
     {
         $errors = [];
-        $id = isset($form['id']) && $form['id'] !== '' ? (int) $form['id'] : 0;
-        $title = trim(isset($form['title']) ? (string) $form['title'] : '');
-        $description = trim(isset($form['description']) ? (string) $form['description'] : '');
-        $category = isset($form['category']) ? $form['category'] : '';
-        $goal = isset($form['goal']) ? $form['goal'] : '';
-        $status = isset($form['status']) ? $form['status'] : 'active';
+        $id = inputId($form, 'id');
+        $title = trim(inputString($form, 'title'));
+        $description = trim(inputString($form, 'description'));
+        $category = inputString($form, 'category');
+        $goal = inputString($form, 'goal');
+        $status = inputString($form, 'status');
 
         if ($title === '' || strlen($title) > 140) {
             $errors[] = 'Enter a campaign title using 140 characters or fewer.';

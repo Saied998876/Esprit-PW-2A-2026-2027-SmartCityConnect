@@ -7,11 +7,7 @@
                 <h1>Campaign dashboard.</h1>
                 <p>Manage local initiatives and review recent community pledges.</p>
             </div>
-            <form method="post" action="admin.php">
-                <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
-                <input type="hidden" name="action" value="logout">
-                <button class="button button-quiet" type="submit">Sign out <span aria-hidden="true">↗</span></button>
-            </form>
+            <a class="button button-quiet" href="users.php">Manage users <span aria-hidden="true">↗</span></a>
         </div>
 
         <?php if ($notice = getMessage('notice')): ?>
@@ -95,7 +91,7 @@
                                 </div>
                             </form>
                             <form method="post" action="admin.php" class="managed-actions"
-                                onsubmit="return confirm('Delete this campaign and its donation records?')">
+                                data-confirm="Delete this campaign and its donation records?">
                                 <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
                                 <input type="hidden" name="action" value="delete_campaign">
                                 <input type="hidden" name="campaign_id" value="<?= (int) $campaign['id'] ?>">

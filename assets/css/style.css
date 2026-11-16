@@ -39,6 +39,9 @@ button { cursor: pointer; }
 .main-navigation a:hover, .main-navigation a.is-active { color: var(--green); }
 .main-navigation .nav-admin { color: var(--green-dark); }
 .nav-admin span { margin-left: 4px; }
+.nav-logout { margin: 0; }
+.nav-logout button { border: 0; padding: 10px 0; background: transparent; color: #64736c; font-size: 13px; font-weight: 600; }
+.nav-logout button:hover { color: var(--green); }
 .nav-toggle { display: none; }
 
 .hero { position: relative; overflow: hidden; background: #e9f1e9; }
@@ -166,6 +169,8 @@ h1, h2, h3, p { margin-top: 0; }
 .receipt-row { display: flex; justify-content: space-between; margin: 24px 0; border-block: 1px solid var(--line); padding: 14px 0; font-size: 12px; }
 .auth-card .back-link { margin: 0 0 28px; }
 .auth-card .form-stack { margin-top: 22px; }
+.auth-alternative { margin: 18px 0 0; color: var(--muted); font-size: 12px; }
+.auth-alternative a { color: var(--green); font-weight: 700; text-decoration: underline; }
 .empty-state { width: min(520px, 100%); margin: 0 auto; padding: 45px 24px; border: 1px dashed #cbd9ce; border-radius: 8px; text-align: center; }
 .empty-icon { display: grid; width: 45px; height: 45px; margin: 0 auto 18px; place-items: center; border-radius: 50%; background: var(--mint); color: var(--green); font-size: 21px; }
 .empty-state h1, .empty-state h3 { margin-bottom: 8px; font-size: 24px; letter-spacing: -.03em; }
@@ -183,6 +188,14 @@ h1, h2, h3, p { margin-top: 0; }
 .stat-card strong { font-size: 25px; letter-spacing: -.04em; }
 .admin-columns { display: grid; grid-template-columns: 1.08fr .92fr; align-items: start; gap: 20px; }
 .admin-card { min-width: 0; border: 1px solid #e2e9e1; border-radius: 7px; padding: 23px; background: #fff; }
+.profile-card, .user-create-card, .user-list-card { max-width: 900px; margin: 0 auto 20px; }
+.profile-card .form-stack { max-width: 580px; }
+.profile-card h2 { margin: 13px 0 0; font-size: 17px; }
+.user-create-form { max-width: 760px; }
+.user-record summary { min-height: 64px; }
+.user-record summary > span:first-child { display: flex; flex-direction: column; gap: 5px; }
+.user-summary-email { color: var(--muted); font-size: 10px; }
+.role-pill { border-radius: 20px; padding: 5px 9px; background: #e7f4e8; color: #2a7041; font-size: 9px; font-weight: 750; }
 .admin-card-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
 .admin-card-heading .eyebrow { margin-bottom: 6px; }
 .admin-card-heading h2 { margin: 0; font-size: 20px; letter-spacing: -.04em; }

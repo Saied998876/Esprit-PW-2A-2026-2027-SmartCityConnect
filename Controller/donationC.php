@@ -14,11 +14,11 @@ class DonationController
     public function store($form)
     {
         $errors = [];
-        $campaignId = isset($form['campaign_id']) ? (int) $form['campaign_id'] : 0;
-        $name = trim(isset($form['donor_name']) ? (string) $form['donor_name'] : '');
-        $email = trim(isset($form['donor_email']) ? (string) $form['donor_email'] : '');
-        $amount = isset($form['amount']) ? (string) $form['amount'] : '';
-        $message = trim(isset($form['message']) ? (string) $form['message'] : '');
+        $campaignId = inputId($form, 'campaign_id');
+        $name = trim(inputString($form, 'donor_name'));
+        $email = trim(inputString($form, 'donor_email'));
+        $amount = inputString($form, 'amount');
+        $message = trim(inputString($form, 'message'));
 
         if ($this->campaignModel->getCampaign($campaignId) === null) {
             $errors[] = 'Choose a campaign that is still accepting donations.';
