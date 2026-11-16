@@ -31,7 +31,6 @@ The main features of Smart City Connect are:
 
 ### Backend
 - PHP
-- MySQL database through XAMPP
 - AdminLTE 4 Template
 
 ### Development Tools
@@ -123,7 +122,6 @@ Copy the project folder into:
 Open the XAMPP Control Panel and start:
 
 - Apache
-- MySQL (when database functionality is needed)
 
 **Step 5: Open the project**
 
