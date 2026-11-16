@@ -85,7 +85,7 @@ button { color: inherit; }
 .category-tag { display: inline-flex; min-height: 22px; align-items: center; padding: 0 8px; border-radius: 12px; background: #eef4ed; color: var(--green); font-size: 9px; font-weight: 800; }
 .category-question { background: #fff2df; color: #9a6b22; }
 .category-idea { background: #f9ebe6; color: #a85b43; }
-.category-alerte { background: #fbe9e8; color: #b84d46; }
+.category-alert { background: #fbe9e8; color: #b84d46; }
 .post-author-row { display: flex; align-items: center; gap: 9px; margin-top: 14px; }
 .avatar-initial { width: 34px; aspect-ratio: 1; font-size: 12px; }
 .post-author-row > span:nth-child(2) strong, .post-author-row > span:nth-child(2) small { display: block; }
