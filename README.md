@@ -133,6 +133,17 @@ Open your web browser and enter:
 
 Once the project files and database configuration are ready, you can access the application through your browser.
 
+### Donations module
+
+The Donations module has a public campaign page and a back office:
+
+- Open `http://localhost/Esprit-PW-2A-2026-2027-SmartCityConnect/` to browse campaigns and make a pledge.
+- Open `http://localhost/Esprit-PW-2A-2026-2027-SmartCityConnect/admin.php` to manage campaigns and view pledges.
+- Make sure PHP's `pdo_sqlite` extension is enabled. On first visit, the module creates a local database in `data/donations.sqlite` and adds three example campaigns.
+- The local demo admin password is `admin123`. Set the `ADMIN_PASSWORD` environment variable before deployment.
+
+The module records pledges only; it does not collect payment details. The local database is not included in Git.
+
 ## Sustainable Development Goals
 
 Smart City Connect supports sustainable development by encouraging citizens to participate in improving their cities.
