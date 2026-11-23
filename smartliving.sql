@@ -1,9 +1,3 @@
--- =====================================================================
--- Smart Living - database
--- Esprit School of Engineering - PIWEB 2A - 2026/2027
--- Import: phpMyAdmin > smartliving > SQL (paste) or Import (file)
--- WARNING: deletes and recreates all the tables.
--- =====================================================================
 
 CREATE DATABASE IF NOT EXISTS smartliving CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE smartliving;
@@ -12,7 +6,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS donation, campaign, response, reclamation, redemption, reward,
   comment, post, event_participation, green_event, task, incident, incident_category, users, user;
 
--- ===== Shared: users (workshop "Sessions and PHP Security") =====
+
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL UNIQUE,
@@ -26,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ===== Module 1: Urban Reporting (Incident + Task) =====
+
 CREATE TABLE IF NOT EXISTS incident (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
@@ -52,7 +46,7 @@ CREATE TABLE IF NOT EXISTS task (
   FOREIGN KEY (incidentId) REFERENCES incident(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ===== Module 2: Events & Participation =====
+
 CREATE TABLE IF NOT EXISTS green_event (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
@@ -76,7 +70,7 @@ CREATE TABLE IF NOT EXISTS event_participation (
   FOREIGN KEY (eventId) REFERENCES green_event(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ===== Module 3: Forum =====
+
 CREATE TABLE IF NOT EXISTS post (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
@@ -97,7 +91,7 @@ CREATE TABLE IF NOT EXISTS comment (
   FOREIGN KEY (postId) REFERENCES post(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ===== Module 4: Green Rewards =====
+
 CREATE TABLE IF NOT EXISTS reward (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(150) NOT NULL,
@@ -120,7 +114,7 @@ CREATE TABLE IF NOT EXISTS redemption (
   FOREIGN KEY (rewardId) REFERENCES reward(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ===== Module 5: Complaints =====
+
 CREATE TABLE IF NOT EXISTS reclamation (
   id INT AUTO_INCREMENT PRIMARY KEY,
   subject VARCHAR(150) NOT NULL,
@@ -142,7 +136,7 @@ CREATE TABLE IF NOT EXISTS response (
   FOREIGN KEY (reclamationId) REFERENCES reclamation(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ===== Module 6: Donations =====
+
 CREATE TABLE IF NOT EXISTS campaign (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
