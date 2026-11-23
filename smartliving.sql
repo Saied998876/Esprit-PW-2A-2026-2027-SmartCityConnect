@@ -1,10 +1,5 @@
 <<<<<<< HEAD
--- =====================================================================
--- Smart Living - database
--- Esprit School of Engineering - PIWEB 2A - 2026/2027
--- Import: phpMyAdmin > smartliving > SQL (paste) or Import (file)
--- WARNING: deletes and recreates all the tables.
--- =====================================================================
+
 =======
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
 
@@ -16,7 +11,7 @@ DROP TABLE IF EXISTS donation, campaign, response, reclamation, redemption, rewa
   comment, post, event_participation, green_event, task, incident, incident_category, users, user;
 
 <<<<<<< HEAD
--- ===== Shared: users (workshop "Sessions and PHP Security") =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
@@ -34,7 +29,7 @@ CREATE TABLE IF NOT EXISTS users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
--- ===== Module 1: Urban Reporting (Incident + Task) =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
@@ -64,7 +59,7 @@ CREATE TABLE IF NOT EXISTS task (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
--- ===== Module 2: Events & Participation =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
@@ -92,7 +87,7 @@ CREATE TABLE IF NOT EXISTS event_participation (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
--- ===== Module 3: Forum =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
@@ -117,7 +112,7 @@ CREATE TABLE IF NOT EXISTS comment (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
--- ===== Module 4: Green Rewards =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
@@ -144,7 +139,7 @@ CREATE TABLE IF NOT EXISTS redemption (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
--- ===== Module 5: Complaints =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
@@ -170,7 +165,7 @@ CREATE TABLE IF NOT EXISTS response (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
--- ===== Module 6: Donations =====
+
 =======
 
 >>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
