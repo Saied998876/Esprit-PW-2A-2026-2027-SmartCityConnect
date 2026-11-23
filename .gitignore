@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 .DS_Store
 .vscode/
 .idea/
 *.log
+=======
+/data/*.sqlite
+/data/*.sqlite-shm
+/data/*.sqlite-wal
+>>>>>>> 25b60f4340519499c295a42cef743b41ba25892a
